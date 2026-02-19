@@ -3,8 +3,8 @@ erDiagram
     ORDER ||--o{ ORDER_DETAILS : "includes"
     PRODUCT ||--o{ ORDER_DETAILS : "sold_in"
     CATEGORY ||--o{ PRODUCT : "contains"
-
-    CUSTOMER {
+\\\mermaid
+    <CUSTOMER {
         int customer_id PK
         string name
         string phone
@@ -29,4 +29,4 @@ erDiagram
         string name
         float price
     }
-    
+    >\\\
