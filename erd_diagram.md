@@ -1,32 +1,65 @@
 erDiagram
-    CUSTOMER ||--o{ ORDER : "places"
-    ORDER ||--o{ ORDER_DETAILS : "includes"
-    PRODUCT ||--o{ ORDER_DETAILS : "sold_in"
-    CATEGORY ||--o{ PRODUCT : "contains"
-\\\mermaid
-    <CUSTOMER {
-        int customer_id PK
+    USERS ||--o| CUSTOMERS : "is"
+    USERS ||--o| EMPLOYEES : "is"
+    CATEGORIES ||--o{ PRODUCTS : "contains"
+    PRODUCTS ||--o{ SALES_DETAILS : "ordered_in"
+    SALES ||--o{ SALES_DETAILS : "has"
+    CUSTOMERS ||--o{ SALES : "buys"
+    EMPLOYEES ||--o{ SALES : "processes"
+    PRODUCTS ||--o{ INVENTORY : "tracked_in"
+    SUPPLIERS ||--o{ INGREDIENTS_PURCHASE : "supplies"
+    CUSTOMERS ||--o{ ORDERS : "places"
+
+    USERS {
+        int user_id PK
         string name
+        string email
+        string password
+        string role
+    }
+
+    CUSTOMERS {
+        int customer_id PK
+        int user_id FK
         string phone
+        string address
     }
 
-    ORDER {
-        int order_id PK
-        date order_date
-        float total_amount
+    EMPLOYEES {
+        int employee_id PK
+        int user_id FK
+        string job_title
+    }
+
+    PRODUCTS {
+        int product_id PK
+        string name
+        decimal price
+        int category_id FK
+    }
+
+    SALES {
+        int sale_id PK
         int customer_id FK
+        int employee_id FK
+        datetime sale_date
+        decimal total
     }
 
-    ORDER_DETAILS {
+    SALES_DETAILS {
         int detail_id PK
-        int order_id FK
+        int sale_id FK
         int product_id FK
         int quantity
     }
 
-    PRODUCT {
-        int product_id PK
-        string name
-        float price
+    INVENTORY {
+        int inventory_id PK
+        int product_id FK
+        int stock
     }
-    >\\\
+
+    CATEGORIES {
+        int category_id PK
+        string name
+    }
