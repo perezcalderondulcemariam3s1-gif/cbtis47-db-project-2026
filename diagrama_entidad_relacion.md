@@ -1,3 +1,5 @@
+##Diagrama E-R
+\\\mermaid
 Table usuarios {
   id_usuario int [pk]
   nombre varchar
@@ -82,3 +84,4 @@ Ref: ventas.id_empleado > empleados.id_empleado
 Ref: detalle_venta.id_venta > ventas.id_venta
 Ref: detalle_venta.id_producto > productos.id_producto
 Ref: pedidos.id_cliente > clientes.id_cliente
+\\\
