@@ -1,35 +1,32 @@
 erDiagram
-    USERS ||--o| CUSTOMERS : "is"
-    USERS ||--o| EMPLOYEES : "is"
-    CATEGORIES ||--o{ PRODUCTS : "contains"
-    PRODUCTS ||--o| INVENTORY : "has"
-    CUSTOMERS ||--o{ ORDERS : "places"
+    CUSTOMER ||--o{ ORDER : "places"
+    ORDER ||--o{ ORDER_DETAILS : "includes"
+    PRODUCT ||--o{ ORDER_DETAILS : "sold_in"
+    CATEGORY ||--o{ PRODUCT : "contains"
 
-    USERS {
-        int user_id PK
-        string name
-        string email
-        string password
-        string role
-    }
-
-    CUSTOMERS {
+    CUSTOMER {
         int customer_id PK
-        int user_id FK
+        string name
         string phone
-        string address
     }
 
-    PRODUCTS {
+    ORDER {
+        int order_id PK
+        date order_date
+        float total_amount
+        int customer_id FK
+    }
+
+    ORDER_DETAILS {
+        int detail_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+    }
+
+    PRODUCT {
         int product_id PK
         string name
         float price
-        int category_id FK
-    }
-
-    INVENTORY {
-        int inventory_id PK
-        int product_id FK
-        int stock_quantity
     }
     
